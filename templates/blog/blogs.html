@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+{% block title %}
+	Blogs
+{% endblock %}
+{% block body %}
+	<div class="container">
+		{% for blog in blog_list %}
+			<div class="card my-2">
+				<div class="card-header">
+					{{ blog.author }}
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">{{ blog.title }}</h5>
+					<p class="card-text">{{ blog.text|truncatechars:100 }}</p>
+					<a href="{{ blog.get_absolute_url }}" class="btn btn-primary">Read more</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

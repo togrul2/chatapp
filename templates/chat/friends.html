@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block title %}
+My Friends
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Friends</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Username</th>
+					<th>date joined</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for friend in friends %}
+					<tr>
+					<td>{{ friend.pk }}</td>
+					<td>{{ friend.username }}</td>
+					<td>{{ friend.date_joined|date:'d-M-Y' }}</td>
+					<td>
+						<a href="{% url 'chat' friend.id %}" class="btn btn-primary">Write</a>
+					</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

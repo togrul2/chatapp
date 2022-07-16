@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% block title %}
+	Create blog
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<form method="post">
+			{% csrf_token %}
+			<div class="mb-3">
+				<label for="title" class="form-label">{{ form.title.label }}</label>
+				{{ form.title }}
+			</div>
+			<div class="mb-3">
+				<label for="text" class="form-label">{{ form.text.label }}</label>
+				{{ form.text }}
+			</div>
+			<input type="submit" value="Create" class="btn btn-primary">
+			{{ form.errors }}
+		</form>
+	</div>
+{% endblock %}

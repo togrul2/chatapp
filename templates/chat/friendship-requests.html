@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block title %}
+	Requests
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Friendship requests</h1>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>sender</th>
+				<th>sent at</th>
+				<th>actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for fr_request in requests %}
+				<tr>
+					<td>{{ fr_request.sender }}</td>
+					<td>{{ fr_request.created_at }}</td>
+					<td>
+						<form class="d-inline" action="{% url 'accept-request' fr_request.id %}" method="post">
+							{% csrf_token %}
+							<input type="submit" class="btn btn-primary" value="Accept">
+						</form>
+						<form class="d-inline" action="{% url 'decline-request' fr_request.id %}" method="post">
+							{% csrf_token %}
+							<input type="submit" class="btn btn-danger" value="Decline">
+						</form>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block title %}Find friends{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Users</h1>
+		<form>
+			<div class="col-lg-4 d-flex">
+				<label for="search"></label>
+				<input class="form-control" type="text" id="search" name="query" value="{{ request.GET.query }}">
+				<input type="submit" value="Search" class="btn btn-primary ms-3">
+			</div>
+		</form>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>id</th>
+				<th>Username</th>
+				<th>date joined</th>
+				<th>actions</th>
+			</tr>
+			</thead>
+			<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.pk }}</td>
+					<td>{{ user.username }}</td>
+					<td>{{ user.date_joined|date:'d-M-Y' }}</td>
+					<td>
+						<form action="{% url 'send_friendship_request' user.id %}" method="post">
+							{% csrf_token %}
+							<input type="submit" value="Request friendship" class="btn btn-primary">
+						</form>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
